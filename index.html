@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Afiliados - Admin</title>
+    <title>Admin Afiliados - Rafael</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="bg-gray-100 flex flex-col min-h-screen font-sans">
 
     <div id="login-screen" class="flex-1 flex items-center justify-center">
-        <div class="bg-white p-10 rounded-2xl shadow-2xl text-center border w-96">
+        <div class="bg-white p-10 rounded-2xl shadow-2xl text-center border w-full max-w-md mx-4">
             <h1 class="text-3xl font-extrabold mb-6 text-slate-800">AfiliadoPro</h1>
-            <p class="text-gray-500 mb-8">Faça login para gerenciar seus produtos e afiliações.</p>
+            <p class="text-gray-500 mb-8">Gerencie seus produtos e afiliações com segurança.</p>
             <button onclick="loginGoogle()" class="w-full bg-white border border-gray-300 flex items-center justify-center px-4 py-3 rounded-xl hover:bg-gray-50 transition shadow-sm font-medium">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 mr-3">
                 Entrar com Google
@@ -23,9 +23,9 @@
     <div id="dashboard" class="hidden flex-1 flex flex-col md:flex-row">
         
         <aside class="w-full md:w-72 bg-slate-900 text-white p-6 flex flex-col">
-            <div class="flex flex-col items-center pb-8 border-b border-slate-700 mb-6">
-                <img id="user-photo" src="" class="w-24 h-24 rounded-full border-4 border-blue-500 shadow-lg mb-4">
-                <h3 id="user-name" class="font-bold text-lg text-center"></h3>
+            <div class="flex flex-col items-center pb-8 border-b border-slate-700 mb-6 text-center">
+                <img id="user-photo" src="" class="w-20 h-20 rounded-full border-4 border-blue-500 shadow-lg mb-4 object-cover">
+                <h3 id="user-name" class="font-bold text-lg"></h3>
                 <span id="admin-badge" class="hidden bg-red-500 text-[10px] font-bold px-3 py-1 rounded-full mt-2 uppercase tracking-widest">Administrador</span>
             </div>
 
@@ -42,16 +42,14 @@
 
         <main class="flex-1 p-8">
             <section id="tab-home">
-                <div class="flex justify-between items-center mb-10">
-                    <h2 class="text-3xl font-bold text-slate-800">Produtos para Afiliação</h2>
-                </div>
+                <h2 class="text-3xl font-bold text-slate-800 mb-10">Produtos Disponíveis</h2>
 
                 <div id="admin-panel" class="hidden bg-blue-600 p-6 rounded-2xl shadow-lg mb-10 text-white">
-                    <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-plus-circle mr-2"></i> Novo Produto (Painel Admin)</h3>
+                    <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-plus-circle mr-2"></i> Adicionar Novo Produto</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <input id="prod-nome" type="text" placeholder="Nome do Produto" class="p-3 rounded-lg text-slate-800 focus:outline-none">
-                        <input id="prod-preco" type="number" placeholder="Preço Original (ex: 75)" class="p-3 rounded-lg text-slate-800 focus:outline-none">
-                        <button onclick="salvarProduto()" class="bg-slate-900 text-white font-bold py-3 rounded-lg hover:bg-black transition">Publicar Produto</button>
+                        <input id="prod-nome" type="text" placeholder="Nome do Produto" class="p-3 rounded-lg text-slate-800 outline-none">
+                        <input id="prod-preco" type="number" placeholder="Preço Original (R$)" class="p-3 rounded-lg text-slate-800 outline-none">
+                        <button onclick="salvarProduto()" class="bg-slate-900 text-white font-bold py-3 rounded-lg hover:bg-black transition">Publicar</button>
                     </div>
                 </div>
 
@@ -60,14 +58,26 @@
             </section>
 
             <section id="tab-afiliacoes" class="hidden">
-                <h2 class="text-3xl font-bold mb-6">Suas Afiliações Ativas</h2>
-                <p class="text-gray-500">Você ainda não se afiliou a nenhum produto.</p>
+                <h2 class="text-3xl font-bold mb-6">Suas Afiliações</h2>
+                <div id="lista-afiliacoes" class="grid grid-cols-1 gap-4 text-gray-500">
+                    Nenhuma afiliação encontrada.
+                </div>
             </section>
 
             <section id="tab-config" class="hidden">
-                <h2 class="text-3xl font-bold mb-6">Configurações</h2>
-                <div class="bg-white p-6 rounded-xl border">
-                    <p><strong>E-mail de Login:</strong> <span id="user-email"></span></p>
+                <h2 class="text-3xl font-bold mb-6 text-slate-800">Configurações de Perfil</h2>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border max-w-2xl">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <img id="conf-photo" src="" class="w-16 h-16 rounded-full border">
+                        <div>
+                            <h3 id="conf-name" class="text-xl font-bold text-slate-800"></h3>
+                            <p id="conf-email" class="text-gray-500"></p>
+                        </div>
+                    </div>
+                    <div class="border-t pt-6">
+                        <p class="text-sm text-gray-600 mb-2 font-medium">Nível de Acesso:</p>
+                        <span id="user-status" class="px-4 py-2 rounded-full text-xs font-bold uppercase"></span>
+                    </div>
                 </div>
             </section>
         </main>
@@ -76,9 +86,8 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, deleteDoc, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // COLOQUE SEU CONFIG AQUI
         const firebaseConfig = {
             apiKey: "AIzaSyDhebhWNET0qK1yA09WYiGayg2vp6fZtmE",
             authDomain: "site-administrativo.firebaseapp.com",
@@ -95,79 +104,111 @@
 
         const ADMIN_EMAIL = "rafaelmartinsdosanjos27@gmail.com";
 
-        // LOGIN E LOGOUT
+        // FUNÇÕES GLOBAIS
         window.loginGoogle = () => signInWithPopup(auth, provider);
         window.logout = () => signOut(auth);
 
-        // NAVEGAÇÃO
         window.showTab = (tabName) => {
-            const tabs = ['home', 'afiliacoes', 'config'];
-            tabs.forEach(t => document.getElementById(`tab-${t}`).classList.add('hidden'));
+            ['home', 'afiliacoes', 'config'].forEach(t => document.getElementById(`tab-${t}`).classList.add('hidden'));
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
         };
 
-        // SALVAR PRODUTO NO FIRESTORE
+        // SALVAR PRODUTO (SÓ ADMIN)
         window.salvarProduto = async () => {
             const nome = document.getElementById('prod-nome').value;
             const preco = document.getElementById('prod-preco').value;
-
-            if(!nome || !preco) return alert("Preencha tudo!");
+            if(!nome || !preco) return alert("Preencha todos os campos!");
 
             try {
                 await addDoc(collection(db, "produtos"), {
                     nome: nome,
                     precoOriginal: Number(preco),
-                    precoAfiliado: 50, // Conforme seu pedido
-                    criadoEm: new Date()
+                    precoAfiliado: 50,
+                    criadoPor: auth.currentUser.email,
+                    data: new Date()
                 });
-                alert("Produto adicionado!");
                 document.getElementById('prod-nome').value = "";
                 document.getElementById('prod-preco').value = "";
-            } catch (e) { console.error(e); }
+                alert("Produto publicado!");
+            } catch (e) { alert("Erro ao salvar produto."); }
+        };
+
+        // REMOVER PRODUTO (SÓ ADMIN)
+        window.removerProduto = async (id) => {
+            if(confirm("Deseja realmente excluir este produto?")) {
+                try {
+                    await deleteDoc(doc(db, "produtos", id));
+                    alert("Produto removido!");
+                } catch (e) { alert("Você não tem permissão para isso."); }
+            }
+        };
+
+        // SE AFILIAR
+        window.seAfiliar = async (id, nome) => {
+            try {
+                await addDoc(collection(db, "afiliacoes"), {
+                    emailAfiliado: auth.currentUser.email,
+                    produtoId: id,
+                    produtoNome: nome,
+                    data: new Date()
+                });
+                alert(`Você agora é afiliado de ${nome}!`);
+            } catch (e) { alert("Erro ao se afiliar."); }
         };
 
         // CARREGAR PRODUTOS EM TEMPO REAL
         onSnapshot(collection(db, "produtos"), (snapshot) => {
             const grid = document.getElementById('grid-produtos');
             grid.innerHTML = "";
-            snapshot.forEach(doc => {
-                const p = doc.data();
+            snapshot.forEach(docSnap => {
+                const p = docSnap.data();
+                const id = docSnap.id;
+                const isAdmin = auth.currentUser?.email === ADMIN_EMAIL;
+
                 grid.innerHTML += `
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition">
-                        <div class="h-40 bg-slate-200 flex items-center justify-center text-slate-400">
-                             <i class="fas fa-box-open text-5xl"></i>
-                        </div>
-                        <div class="p-6">
-                            <h4 class="font-bold text-xl text-slate-800 mb-2">${p.nome}</h4>
-                            <p class="text-gray-400 text-sm">Venda ao público: <span class="line-through">R$ ${p.precoOriginal}</span></p>
-                            <p class="text-green-600 font-bold text-2xl mt-1">Afiliado: R$ ${p.precoAfiliado}</p>
-                            <button class="mt-6 w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition">Quero me Afiliar</button>
-                        </div>
+                    <div class="bg-white rounded-2xl shadow-sm border p-6 relative hover:shadow-lg transition">
+                        ${isAdmin ? `
+                            <button onclick="removerProduto('${id}')" class="absolute top-4 right-4 text-red-400 hover:text-red-600 transition">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        ` : ''}
+                        <h4 class="font-bold text-xl text-slate-800 mb-2">${p.nome}</h4>
+                        <p class="text-gray-400 text-sm">Venda: <span class="line-through">R$ ${p.precoOriginal}</span></p>
+                        <p class="text-green-600 font-bold text-2xl mt-1">Afiliado: R$ 50,00</p>
+                        <button onclick="seAfiliar('${id}', '${p.nome}')" class="mt-6 w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition">Quero me Afiliar</button>
                     </div>
                 `;
             });
         });
 
-        // MONITORAR LOGIN
+        // MONITORAR ESTADO DE LOGIN
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('dashboard').classList.remove('hidden');
                 
+                // Preencher UI
                 document.getElementById('user-name').innerText = user.displayName;
                 document.getElementById('user-photo').src = user.photoURL;
-                document.getElementById('user-email').innerText = user.email;
+                document.getElementById('conf-name').innerText = user.displayName;
+                document.getElementById('conf-email').innerText = user.email;
+                document.getElementById('conf-photo').src = user.photoURL;
 
-                if(user.email === ADMIN_EMAIL) {
+                const isAdmin = user.email === ADMIN_EMAIL;
+                if(isAdmin) {
                     document.getElementById('admin-panel').classList.remove('hidden');
                     document.getElementById('admin-badge').classList.remove('hidden');
+                    document.getElementById('user-status').innerText = "Administrador Master";
+                    document.getElementById('user-status').className = "px-4 py-2 rounded-full text-xs font-bold uppercase bg-blue-100 text-blue-700";
+                } else {
+                    document.getElementById('user-status').innerText = "Afiliado Verificado";
+                    document.getElementById('user-status').className = "px-4 py-2 rounded-full text-xs font-bold uppercase bg-green-100 text-green-700";
                 }
             } else {
                 document.getElementById('login-screen').classList.remove('hidden');
                 document.getElementById('dashboard').classList.add('hidden');
             }
         });
-
     </script>
 </body>
 </html>
