@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afiliado Pro - Marketplace</title>
+    <title>Afiliado Pro - Versão Mestre</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 min-h-screen font-sans text-slate-900">
+<body class="bg-slate-50 min-h-screen font-sans">
 
-    <div id="overlay-manutencao" class="hidden fixed inset-0 bg-slate-900 z-[9999] flex items-center justify-center text-white">
-        <div class="text-center"><i class="fas fa-tools text-6xl mb-4 text-orange-500"></i><h1 class="text-3xl font-bold">Manutenção</h1></div>
-    </div>
-
-    <div id="login-screen" class="flex min-h-screen items-center justify-center">
-        <div class="bg-white p-10 rounded-[40px] shadow-2xl text-center w-full max-w-md border">
+    <div id="login-screen" class="flex min-h-screen items-center justify-center bg-slate-100">
+        <div class="bg-white p-10 rounded-[40px] shadow-2xl text-center w-full max-w-md">
             <h1 class="text-4xl font-black mb-8 italic">AFILIADO<span class="text-blue-600">PRO</span></h1>
-            <button onclick="loginGoogle()" class="w-full bg-slate-900 text-white flex items-center justify-center py-4 rounded-2xl font-bold hover:bg-black transition">
+            <button onclick="loginGoogle()" class="w-full bg-slate-900 text-white flex items-center justify-center py-4 rounded-2xl font-bold hover:bg-black transition shadow-xl">
                 Entrar com Google
             </button>
         </div>
@@ -24,66 +20,79 @@
 
     <div id="dashboard" class="hidden min-h-screen flex flex-col md:flex-row">
         
-        <aside class="w-full md:w-72 bg-white border-r p-6 flex flex-col">
-            <div class="flex flex-col items-center pb-8 border-b mb-6">
-                <img id="user-photo" src="" class="w-20 h-20 rounded-2xl shadow-md mb-4 object-cover border-4 border-white ring-2 ring-slate-100">
-                <h3 id="user-name" class="font-bold text-slate-800"></h3>
-                <div id="user-status-sidebar" class="mt-2 text-[10px] font-black px-3 py-1 rounded-lg uppercase border"></div>
+        <aside class="w-full md:w-72 bg-slate-900 text-white p-6 flex flex-col">
+            <div class="flex flex-col items-center pb-8 border-b border-slate-800 mb-6 text-center">
+                <img id="user-photo" src="" class="w-20 h-20 rounded-3xl mb-4 object-cover border-2 border-blue-500 p-1">
+                <h3 id="user-name" class="font-bold"></h3>
+                <div id="user-status-sidebar" class="mt-2 text-[10px] font-black px-3 py-1 rounded-lg uppercase bg-blue-600"></div>
             </div>
 
             <nav class="space-y-2 flex-1">
-                <button onclick="showTab('home')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-100 transition font-bold"><i class="fas fa-store mr-3 text-blue-500"></i> Mercado</button>
-                <button onclick="showTab('afiliacoes')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-100 transition font-bold"><i class="fas fa-link mr-3 text-emerald-500"></i> Meus Links</button>
-                <button id="btn-admin-master" onclick="showTab('admin-master')" class="hidden w-full text-left p-4 rounded-2xl bg-red-50 text-red-600 hover:bg-red-100 transition font-bold border border-red-100"><i class="fas fa-crown mr-3"></i> Painel Mestre</button>
-                <button onclick="showTab('config')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-100 transition font-bold"><i class="fas fa-cog mr-3 text-slate-400"></i> Config</button>
+                <button onclick="showTab('home')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-store mr-3"></i> Mercado</button>
+                <button onclick="showTab('afiliacoes')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-link mr-3 text-emerald-400"></i> Meus Links</button>
+                <button id="btn-admin-master" onclick="showTab('admin-master')" class="hidden w-full text-left p-4 rounded-2xl bg-red-600/20 text-red-400 hover:bg-red-600/30 transition font-bold border border-red-600/30"><i class="fas fa-crown mr-3"></i> Painel Mestre</button>
+                <button onclick="showTab('config')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-user-circle mr-3"></i> Perfil</button>
             </nav>
-            <button onclick="logout()" class="p-4 text-slate-400 hover:text-red-500 font-bold transition">Sair</button>
+            <button onclick="logout()" class="p-4 text-slate-500 hover:text-white font-bold transition text-center">Sair</button>
         </aside>
 
-        <main class="flex-1 p-8 lg:p-12">
+        <main class="flex-1 p-8 overflow-y-auto">
             
             <section id="tab-home">
                 <div class="flex justify-between items-center mb-10">
-                    <h2 class="text-4xl font-black text-slate-800 tracking-tight">Produtos</h2>
-                    <button id="btn-abrir-cadastro" onclick="toggleForm()" class="hidden bg-blue-600 text-white px-6 py-3 rounded-2xl font-black hover:bg-blue-700 transition shadow-lg flex items-center gap-2">
-                        <i class="fas fa-plus"></i> Novo Produto
+                    <h2 class="text-4xl font-black text-slate-800">Mercado</h2>
+                    <button id="btn-abrir-cadastro" onclick="toggleForm()" class="hidden bg-blue-600 text-white px-6 py-3 rounded-2xl font-black hover:bg-blue-700 transition shadow-lg">
+                        + Novo Produto
                     </button>
                 </div>
                 
-                <div id="admin-panel" class="hidden bg-white p-8 rounded-[35px] shadow-xl border border-slate-200 mb-12 animate-in fade-in duration-300">
-                    <h3 class="text-xl font-bold mb-6 flex items-center"><i class="fas fa-rocket mr-2 text-blue-500"></i> Postar no Marketplace</h3>
+                <div id="admin-panel" class="hidden bg-white p-8 rounded-[30px] shadow-sm border mb-12">
+                    <h3 class="text-xl font-bold mb-6 italic">Cadastrar Produto</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input id="prod-nome" type="text" placeholder="Nome do Produto" class="p-4 bg-slate-50 rounded-2xl border outline-none focus:border-blue-500">
-                        <input id="prod-preco" type="number" placeholder="Preço Sugerido (R$)" class="p-4 bg-slate-50 rounded-2xl border outline-none focus:border-blue-500">
-                        <input id="prod-thumb" type="text" placeholder="URL da Miniatura (Link da Imagem)" class="p-4 bg-slate-50 rounded-2xl border outline-none focus:border-blue-500">
-                        <input id="prod-link" type="text" placeholder="Link do Site de Afiliado" class="p-4 bg-slate-50 rounded-2xl border outline-none focus:border-blue-500">
-                        <textarea id="prod-desc" placeholder="Breve descrição do produto..." class="p-4 bg-slate-50 rounded-2xl border outline-none focus:border-blue-500 md:col-span-2 h-24"></textarea>
-                        <button onclick="salvarProduto()" class="md:col-span-2 bg-blue-600 text-white py-4 rounded-2xl font-black hover:bg-blue-700 transition">POSTAR PRODUTO AGORA</button>
+                        <input id="prod-nome" type="text" placeholder="Nome" class="p-4 bg-slate-50 rounded-xl border outline-none">
+                        <input id="prod-preco" type="number" placeholder="Preço (R$)" class="p-4 bg-slate-50 rounded-xl border outline-none">
+                        <input id="prod-thumb" type="text" placeholder="URL da Imagem" class="p-4 bg-slate-50 rounded-xl border outline-none">
+                        <input id="prod-link" type="text" placeholder="Link de Afiliado" class="p-4 bg-slate-50 rounded-xl border outline-none">
+                        <textarea id="prod-desc" placeholder="Descrição" class="p-4 bg-slate-50 rounded-xl border outline-none md:col-span-2"></textarea>
+                        <button onclick="salvarProduto()" class="md:col-span-2 bg-slate-900 text-white py-4 rounded-xl font-black">POSTAR</button>
                     </div>
                 </div>
-
                 <div id="grid-produtos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
             </section>
 
             <section id="tab-afiliacoes" class="hidden">
-                <h2 class="text-4xl font-black mb-10">Minhas Afiliações</h2>
-                <div id="lista-afiliacoes" class="grid gap-6 grid-cols-1 md:grid-cols-2"></div>
+                <h2 class="text-4xl font-black mb-10">Meus Links</h2>
+                <div id="lista-afiliacoes" class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
             </section>
 
             <section id="tab-admin-master" class="hidden">
-                <h2 class="text-4xl font-black text-red-600 mb-10">Gestão de Usuários</h2>
-                <div class="bg-white rounded-[35px] border shadow-sm overflow-hidden">
+                <h2 class="text-4xl font-black text-red-600 mb-10">Gestão de Cargos</h2>
+                <div class="bg-white rounded-[30px] border shadow-sm overflow-hidden">
                     <table class="w-full text-left">
-                        <thead class="bg-slate-50 border-b"><tr class="text-[10px] text-slate-400 uppercase font-black"><th class="p-6">Usuário</th><th class="p-6">Nível</th><th class="p-6 text-right">Ação</th></tr></thead>
+                        <thead class="bg-slate-50 border-b">
+                            <tr class="text-[10px] text-slate-400 uppercase font-black">
+                                <th class="p-6">Usuário</th>
+                                <th class="p-6 text-center">Cargo</th>
+                                <th class="p-6 text-right">Ação</th>
+                            </tr>
+                        </thead>
                         <tbody id="lista-gestao-cargos" class="divide-y"></tbody>
                     </table>
                 </div>
             </section>
 
             <section id="tab-config" class="hidden">
-                <h2 class="text-3xl font-black mb-10">Perfil</h2>
-                <div id="perfil-card" class="bg-white p-10 rounded-[40px] border shadow-sm max-w-xl"></div>
+                <h2 class="text-4xl font-black mb-10">Meu Perfil</h2>
+                <div class="bg-white p-10 rounded-[40px] border shadow-sm max-w-2xl flex items-center gap-8">
+                    <img id="conf-photo" src="" class="w-24 h-24 rounded-full border-4 border-blue-500">
+                    <div>
+                        <h3 id="conf-name" class="text-2xl font-black"></h3>
+                        <p id="conf-email" class="text-slate-400"></p>
+                        <div id="conf-cargo-badge" class="mt-2 inline-block px-4 py-1 rounded-lg bg-slate-100 text-[10px] font-bold uppercase border"></div>
+                    </div>
+                </div>
             </section>
+
         </main>
     </div>
 
@@ -115,125 +124,128 @@
             document.getElementById(`tab-${name}`).classList.remove('hidden');
         };
 
-        // --- SALVAR PRODUTO ---
+        // SALVAR PRODUTO
         window.salvarProduto = async () => {
             const campos = {
                 nome: document.getElementById('prod-nome').value,
                 preco: document.getElementById('prod-preco').value,
-                thumb: document.getElementById('prod-thumb').value || 'https://via.placeholder.com/300x200?text=Sem+Foto',
+                thumb: document.getElementById('prod-thumb').value || 'https://via.placeholder.com/300x200',
                 link: document.getElementById('prod-link').value,
                 desc: document.getElementById('prod-desc').value,
                 autorNome: auth.currentUser.displayName,
                 autorFoto: auth.currentUser.photoURL,
-                autorEmail: auth.currentUser.email,
-                data: new Date()
+                autorEmail: auth.currentUser.email
             };
-
-            if(!campos.nome || !campos.link) return alert("Nome e Link são obrigatórios!");
-            
+            if(!campos.nome || !campos.link) return alert("Preencha Nome e Link!");
             await addDoc(collection(db, "produtos"), campos);
-            alert("Produto postado com sucesso!");
+            alert("Postado!");
             window.toggleForm();
-            document.querySelectorAll('#admin-panel input, #admin-panel textarea').forEach(i => i.value = "");
         };
 
-        // --- AFILIAR-SE (Trava de uma vez por produto) ---
+        // AFILIAR-SE (ÚNICA VEZ)
         window.seAfiliar = async (id, nome, link) => {
-            const q = query(collection(db, "afiliacoes"), 
-                where("emailAfiliado", "==", auth.currentUser.email),
-                where("produtoId", "==", id)
-            );
-            
+            const q = query(collection(db, "afiliacoes"), where("emailAfiliado", "==", auth.currentUser.email), where("produtoId", "==", id));
             const existe = await getDocs(q);
-            if(!existe.empty) return alert("Você já se afiliou a este produto!");
+            if(!existe.empty) return alert("Você já é afiliado deste produto!");
 
             await addDoc(collection(db, "afiliacoes"), {
                 emailAfiliado: auth.currentUser.email,
                 produtoId: id,
                 produtoNome: nome,
-                produtoLink: link,
-                data: new Date()
+                produtoLink: link
             });
-            alert("Afiliação concluída! Veja na aba 'Meus Links'.");
+            alert("Link gerado em 'Meus Links'!");
         };
 
-        // --- LISTAR PRODUTOS ---
-        onSnapshot(collection(db, "produtos"), (snapshot) => {
-            const grid = document.getElementById('grid-produtos');
-            grid.innerHTML = "";
-            snapshot.forEach(docSnap => {
-                const p = docSnap.data();
-                grid.innerHTML += `
-                    <div class="bg-white rounded-[35px] shadow-sm border overflow-hidden hover:shadow-xl transition-all group">
-                        <img src="${p.thumb}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform">
-                        <div class="p-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <img src="${p.autorFoto}" class="w-6 h-6 rounded-full border">
-                                <span class="text-[10px] font-bold text-slate-500 uppercase">${p.autorNome}</span>
-                            </div>
-                            <h4 class="font-black text-xl mb-1">${p.nome}</h4>
-                            <p class="text-slate-400 text-xs mb-4 line-clamp-2">${p.desc || 'Sem descrição.'}</p>
-                            <div class="flex justify-between items-end mb-6">
-                                <div><p class="text-[9px] font-black text-blue-500 uppercase">Preço</p><p class="font-black text-2xl text-slate-800">R$ ${p.preco}</p></div>
-                                <div class="text-right"><p class="text-[9px] font-black text-emerald-500 uppercase">Comissão</p><p class="font-black text-xl text-emerald-600">R$ 50,00</p></div>
-                            </div>
-                            <button onclick="seAfiliar('${docSnap.id}', '${p.nome}', '${p.link}')" class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-blue-600 transition shadow-lg">SOLICITAR AFILIAÇÃO</button>
-                        </div>
-                    </div>
-                `;
-            });
-        });
-
-        // --- LISTAR AFILIAÇÕES ---
-        const carregarMeusLinks = () => {
-            onSnapshot(query(collection(db, "afiliacoes"), where("emailAfiliado", "==", auth.currentUser.email)), snap => {
-                const container = document.getElementById('lista-afiliacoes');
-                container.innerHTML = "";
-                snap.forEach(d => {
-                    const data = d.data();
-                    container.innerHTML += `
-                        <div class="bg-white p-6 rounded-3xl border shadow-sm flex flex-col gap-4">
-                            <h4 class="font-black text-lg">${data.produtoNome}</h4>
-                            <div class="bg-slate-50 p-4 rounded-xl text-xs font-mono break-all border text-blue-600">${data.produtoLink}</div>
-                            <a href="${data.produtoLink}" target="_blank" class="bg-emerald-500 text-white text-center py-2 rounded-xl font-bold hover:bg-emerald-600 transition">Acessar Site</a>
-                        </div>
-                    `;
-                });
-            });
-        };
-
-        // --- AUTH ---
+        // CARREGAR TUDO
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userRef = doc(db, "usuarios", user.uid);
+                
+                // Força o cargo se for você
                 if (user.email === RAFAEL_EMAIL) {
                     await setDoc(userRef, { nome: user.displayName, email: user.email, cargo: "criador", photo: user.photoURL }, { merge: true });
+                } else {
+                    const snap = await getDoc(userRef);
+                    if(!snap.exists()) await setDoc(userRef, { nome: user.displayName, email: user.email, cargo: "minimo", photo: user.photoURL });
                 }
-                const userData = (await getDoc(userRef)).data() || { cargo: 'minimo' };
-                const cargo = userData.cargo || 'minimo';
 
+                const userData = (await getDoc(userRef)).data();
+                const cargo = userData.cargo || "minimo";
+
+                // INTERFACE
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('dashboard').classList.remove('hidden');
                 document.getElementById('user-name').innerText = user.displayName;
                 document.getElementById('user-photo').src = user.photoURL;
+                document.getElementById('user-status-sidebar').innerText = cargo;
 
-                // Libera Botão de Adicionar
-                if(['criador', 'admin', 'verificado'].includes(cargo)) {
-                    document.getElementById('btn-abrir-cadastro').classList.remove('hidden');
-                }
+                // PERFIL
+                document.getElementById('conf-name').innerText = user.displayName;
+                document.getElementById('conf-email').innerText = user.email;
+                document.getElementById('conf-photo').src = user.photoURL;
+                document.getElementById('conf-cargo-badge').innerText = "Nível: " + cargo;
 
-                // Libera Painel Mestre
+                // PERMISSÕES
+                if(['criador', 'admin', 'verificado'].includes(cargo)) document.getElementById('btn-abrir-cadastro').classList.remove('hidden');
                 if(['criador', 'admin'].includes(cargo)) {
                     document.getElementById('btn-admin-master').classList.remove('hidden');
+                    // Listar Usuários no Painel Mestre
+                    onSnapshot(collection(db, "usuarios"), snap => {
+                        const lista = document.getElementById('lista-gestao-cargos');
+                        lista.innerHTML = "";
+                        snap.forEach(d => {
+                            const u = d.data();
+                            lista.innerHTML += `
+                                <tr>
+                                    <td class="p-6 font-bold text-sm">${u.nome}<br><span class="text-[10px] text-slate-400">${u.email}</span></td>
+                                    <td class="p-6 text-center"><span class="px-3 py-1 bg-slate-100 rounded-lg text-[10px] font-black">${u.cargo}</span></td>
+                                    <td class="p-6 text-right">
+                                        <select onchange="alterarCargo('${d.id}', this.value)" class="text-[10px] border rounded p-1">
+                                            <option value="minimo" ${u.cargo==='minimo'?'selected':''}>MÍNIMO</option>
+                                            <option value="verificado" ${u.cargo==='verificado'?'selected':''}>VERIFICADO</option>
+                                            <option value="admin" ${u.cargo==='admin'?'selected':''}>ADMIN</option>
+                                        </select>
+                                    </td>
+                                </tr>`;
+                        });
+                    });
                 }
 
-                document.getElementById('user-status-sidebar').innerText = cargo;
-                carregarMeusLinks();
-            } else {
-                document.getElementById('login-screen').classList.remove('hidden');
-                document.getElementById('dashboard').classList.add('hidden');
+                // MEUS LINKS
+                onSnapshot(query(collection(db, "afiliacoes"), where("emailAfiliado", "==", user.email)), snap => {
+                    const container = document.getElementById('lista-afiliacoes');
+                    container.innerHTML = "";
+                    snap.forEach(d => {
+                        const l = d.data();
+                        container.innerHTML += `<div class="bg-white p-6 rounded-3xl border shadow-sm">
+                            <h4 class="font-black mb-2">${l.produtoNome}</h4>
+                            <input readonly value="${l.produtoLink}" class="w-full text-[10px] p-2 bg-slate-50 border rounded-lg mb-4">
+                            <a href="${l.produtoLink}" target="_blank" class="block w-full text-center bg-emerald-500 text-white py-2 rounded-xl font-bold">Acessar Site</a>
+                        </div>`;
+                    });
+                });
+
+                // MERCADO
+                onSnapshot(collection(db, "produtos"), snap => {
+                    const grid = document.getElementById('grid-produtos');
+                    grid.innerHTML = "";
+                    snap.forEach(d => {
+                        const p = d.data();
+                        grid.innerHTML += `<div class="bg-white rounded-[30px] border shadow-sm overflow-hidden">
+                            <img src="${p.thumb}" class="h-40 w-full object-cover">
+                            <div class="p-6">
+                                <p class="text-[9px] font-black text-slate-400 mb-2">POSTADO POR: ${p.autorNome}</p>
+                                <h4 class="font-black text-xl mb-4">${p.nome}</h4>
+                                <button onclick="seAfiliar('${d.id}', '${p.nome}', '${p.link}')" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black">AFILIAR-SE</button>
+                            </div>
+                        </div>`;
+                    });
+                });
             }
         });
+
+        window.alterarCargo = async (id, novo) => { await updateDoc(doc(db, "usuarios", id), { cargo: novo }); alert("Atualizado!"); };
     </script>
 </body>
 </html>
