@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afiliado Pro - Versão Mestre</title>
+    <title>Afiliado Pro - Mestre</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 min-h-screen font-sans">
+<body class="bg-slate-50 min-h-screen font-sans text-slate-900">
 
-    <div id="login-screen" class="flex min-h-screen items-center justify-center bg-slate-100">
-        <div class="bg-white p-10 rounded-[40px] shadow-2xl text-center w-full max-w-md">
+    <div id="manutencao-screen" class="hidden fixed inset-0 bg-slate-900 z-[9999] flex items-center justify-center text-center p-6 text-white">
+        <div><i class="fas fa-tools text-6xl mb-6 text-orange-500 animate-bounce"></i><h1 class="text-4xl font-bold">EM MANUTENÇÃO</h1><p class="mt-4 text-slate-400">Voltaremos em breve com novidades!</p></div>
+    </div>
+
+    <div id="login-screen" class="flex min-h-screen items-center justify-center">
+        <div class="bg-white p-10 rounded-[40px] shadow-2xl text-center w-full max-w-md border">
             <h1 class="text-4xl font-black mb-8 italic">AFILIADO<span class="text-blue-600">PRO</span></h1>
-            <button onclick="loginGoogle()" class="w-full bg-slate-900 text-white flex items-center justify-center py-4 rounded-2xl font-bold hover:bg-black transition shadow-xl">
-                Entrar com Google
-            </button>
+            <button onclick="loginGoogle()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl">Entrar com Google</button>
         </div>
     </div>
 
@@ -22,77 +24,65 @@
         
         <aside class="w-full md:w-72 bg-slate-900 text-white p-6 flex flex-col">
             <div class="flex flex-col items-center pb-8 border-b border-slate-800 mb-6 text-center">
-                <img id="user-photo" src="" class="w-20 h-20 rounded-3xl mb-4 object-cover border-2 border-blue-500 p-1">
+                <img id="user-photo" src="" class="w-20 h-20 rounded-3xl mb-4 border-2 border-blue-500 p-1">
                 <h3 id="user-name" class="font-bold"></h3>
                 <div id="user-status-sidebar" class="mt-2 text-[10px] font-black px-3 py-1 rounded-lg uppercase bg-blue-600"></div>
             </div>
 
             <nav class="space-y-2 flex-1">
                 <button onclick="showTab('home')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-store mr-3"></i> Mercado</button>
-                <button onclick="showTab('afiliacoes')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-link mr-3 text-emerald-400"></i> Meus Links</button>
-                <button id="btn-admin-master" onclick="showTab('admin-master')" class="hidden w-full text-left p-4 rounded-2xl bg-red-600/20 text-red-400 hover:bg-red-600/30 transition font-bold border border-red-600/30"><i class="fas fa-crown mr-3"></i> Painel Mestre</button>
-                <button onclick="showTab('config')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-user-circle mr-3"></i> Perfil</button>
+                <button onclick="showTab('afiliacoes')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-link mr-3"></i> Meus Links</button>
+                <button id="btn-admin-master" onclick="showTab('admin-master')" class="hidden w-full text-left p-4 rounded-2xl bg-red-600 text-white font-bold"><i class="fas fa-crown mr-3"></i> Painel Mestre</button>
+                <button onclick="showTab('config')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-user mr-3"></i> Perfil</button>
             </nav>
-            <button onclick="logout()" class="p-4 text-slate-500 hover:text-white font-bold transition text-center">Sair</button>
+            <button onclick="logout()" class="p-4 text-slate-500 hover:text-white font-bold">Sair</button>
         </aside>
 
-        <main class="flex-1 p-8 overflow-y-auto">
+        <main class="flex-1 p-8">
             
             <section id="tab-home">
                 <div class="flex justify-between items-center mb-10">
-                    <h2 class="text-4xl font-black text-slate-800">Mercado</h2>
-                    <button id="btn-abrir-cadastro" onclick="toggleForm()" class="hidden bg-blue-600 text-white px-6 py-3 rounded-2xl font-black hover:bg-blue-700 transition shadow-lg">
-                        + Novo Produto
-                    </button>
+                    <h2 class="text-4xl font-black">Mercado</h2>
+                    <button id="btn-abrir-cadastro" onclick="toggleForm()" class="hidden bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold">+ Novo Produto</button>
                 </div>
-                
-                <div id="admin-panel" class="hidden bg-white p-8 rounded-[30px] shadow-sm border mb-12">
-                    <h3 class="text-xl font-bold mb-6 italic">Cadastrar Produto</h3>
+                <div id="admin-panel" class="hidden bg-white p-8 rounded-[30px] shadow-sm border mb-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input id="prod-nome" type="text" placeholder="Nome" class="p-4 bg-slate-50 rounded-xl border outline-none">
-                        <input id="prod-preco" type="number" placeholder="Preço (R$)" class="p-4 bg-slate-50 rounded-xl border outline-none">
-                        <input id="prod-thumb" type="text" placeholder="URL da Imagem" class="p-4 bg-slate-50 rounded-xl border outline-none">
-                        <input id="prod-link" type="text" placeholder="Link de Afiliado" class="p-4 bg-slate-50 rounded-xl border outline-none">
-                        <textarea id="prod-desc" placeholder="Descrição" class="p-4 bg-slate-50 rounded-xl border outline-none md:col-span-2"></textarea>
-                        <button onclick="salvarProduto()" class="md:col-span-2 bg-slate-900 text-white py-4 rounded-xl font-black">POSTAR</button>
+                        <input id="prod-nome" type="text" placeholder="Nome" class="p-4 bg-slate-50 rounded-xl border">
+                        <input id="prod-preco" type="number" placeholder="Preço" class="p-4 bg-slate-50 rounded-xl border">
+                        <input id="prod-thumb" type="text" placeholder="Link da Imagem" class="p-4 bg-slate-50 rounded-xl border">
+                        <input id="prod-link" type="text" placeholder="Link de Afiliado" class="p-4 bg-slate-50 rounded-xl border">
+                        <textarea id="prod-desc" placeholder="Descrição" class="p-4 bg-slate-50 rounded-xl border md:col-span-2"></textarea>
+                        <button onclick="salvarProduto()" class="md:col-span-2 bg-slate-900 text-white py-4 rounded-xl font-bold">POSTAR PRODUTO</button>
                     </div>
                 </div>
-                <div id="grid-produtos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-            </section>
-
-            <section id="tab-afiliacoes" class="hidden">
-                <h2 class="text-4xl font-black mb-10">Meus Links</h2>
-                <div id="lista-afiliacoes" class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+                <div id="grid-produtos" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
             </section>
 
             <section id="tab-admin-master" class="hidden">
-                <h2 class="text-4xl font-black text-red-600 mb-10">Gestão de Cargos</h2>
+                <h2 class="text-4xl font-black text-red-600 mb-8">Painel de Controle</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                    <div class="bg-white p-6 rounded-3xl border shadow-sm">
+                        <h3 class="font-bold mb-4">Sistema de Manutenção</h3>
+                        <div class="flex gap-2">
+                            <button onclick="setManutencao(true)" class="bg-orange-500 text-white px-6 py-2 rounded-xl font-bold">LIGAR</button>
+                            <button onclick="setManutencao(false)" class="bg-emerald-500 text-white px-6 py-2 rounded-xl font-bold">DESLIGAR</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="bg-white rounded-[30px] border shadow-sm overflow-hidden">
                     <table class="w-full text-left">
-                        <thead class="bg-slate-50 border-b">
-                            <tr class="text-[10px] text-slate-400 uppercase font-black">
-                                <th class="p-6">Usuário</th>
-                                <th class="p-6 text-center">Cargo</th>
-                                <th class="p-6 text-right">Ação</th>
-                            </tr>
+                        <thead class="bg-slate-50 border-b font-bold text-xs uppercase text-slate-400">
+                            <tr><th class="p-6">Usuário</th><th class="p-6">Cargo</th><th class="p-6 text-right">Ações</th></tr>
                         </thead>
                         <tbody id="lista-gestao-cargos" class="divide-y"></tbody>
                     </table>
                 </div>
             </section>
 
-            <section id="tab-config" class="hidden">
-                <h2 class="text-4xl font-black mb-10">Meu Perfil</h2>
-                <div class="bg-white p-10 rounded-[40px] border shadow-sm max-w-2xl flex items-center gap-8">
-                    <img id="conf-photo" src="" class="w-24 h-24 rounded-full border-4 border-blue-500">
-                    <div>
-                        <h3 id="conf-name" class="text-2xl font-black"></h3>
-                        <p id="conf-email" class="text-slate-400"></p>
-                        <div id="conf-cargo-badge" class="mt-2 inline-block px-4 py-1 rounded-lg bg-slate-100 text-[10px] font-bold uppercase border"></div>
-                    </div>
-                </div>
-            </section>
-
+            <section id="tab-afiliacoes" class="hidden"><h2 class="text-4xl font-black mb-8">Meus Links</h2><div id="lista-afiliacoes" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></section>
+            <section id="tab-config" class="hidden"><h2 class="text-4xl font-black mb-8">Meu Perfil</h2><div id="perfil-info" class="bg-white p-8 rounded-3xl border shadow-sm"></div></section>
         </main>
     </div>
 
@@ -114,138 +104,92 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
-        const RAFAEL_EMAIL = "rafaelmartinsdosanjos27@gmail.com";
+        const MESTRE = "rafaelmartinsdosanjos27@gmail.com";
 
         window.loginGoogle = () => signInWithPopup(auth, provider);
         window.logout = () => signOut(auth);
-        window.toggleForm = () => document.getElementById('admin-panel').classList.toggle('hidden');
         window.showTab = (name) => {
             ['home', 'afiliacoes', 'config', 'admin-master'].forEach(t => document.getElementById(`tab-${t}`).classList.add('hidden'));
             document.getElementById(`tab-${name}`).classList.remove('hidden');
         };
+        window.toggleForm = () => document.getElementById('admin-panel').classList.toggle('hidden');
 
-        // SALVAR PRODUTO
-        window.salvarProduto = async () => {
-            const campos = {
-                nome: document.getElementById('prod-nome').value,
-                preco: document.getElementById('prod-preco').value,
-                thumb: document.getElementById('prod-thumb').value || 'https://via.placeholder.com/300x200',
-                link: document.getElementById('prod-link').value,
-                desc: document.getElementById('prod-desc').value,
-                autorNome: auth.currentUser.displayName,
-                autorFoto: auth.currentUser.photoURL,
-                autorEmail: auth.currentUser.email
-            };
-            if(!campos.nome || !campos.link) return alert("Preencha Nome e Link!");
-            await addDoc(collection(db, "produtos"), campos);
-            alert("Postado!");
-            window.toggleForm();
-        };
+        // MANUTENÇÃO
+        window.setManutencao = async (val) => { await setDoc(doc(db, "configuracoes", "geral"), { status: val }); };
+        onSnapshot(doc(db, "configuracoes", "geral"), snap => {
+            if(snap.exists() && snap.data().status && auth.currentUser?.email !== MESTRE) {
+                document.getElementById('manutencao-screen').classList.remove('hidden');
+            } else { document.getElementById('manutencao-screen').classList.add('hidden'); }
+        });
 
-        // AFILIAR-SE (ÚNICA VEZ)
-        window.seAfiliar = async (id, nome, link) => {
-            const q = query(collection(db, "afiliacoes"), where("emailAfiliado", "==", auth.currentUser.email), where("produtoId", "==", id));
-            const existe = await getDocs(q);
-            if(!existe.empty) return alert("Você já é afiliado deste produto!");
+        // CARGOS E BAN
+        window.alterarCargo = async (id, cargo) => { await updateDoc(doc(db, "usuarios", id), { cargo }); };
+        window.banirUser = async (id, status) => { await updateDoc(doc(db, "usuarios", id), { banido: status }); alert(status ? "BANIDO" : "DESBANIDO"); };
 
-            await addDoc(collection(db, "afiliacoes"), {
-                emailAfiliado: auth.currentUser.email,
-                produtoId: id,
-                produtoNome: nome,
-                produtoLink: link
-            });
-            alert("Link gerado em 'Meus Links'!");
-        };
-
-        // CARREGAR TUDO
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userRef = doc(db, "usuarios", user.uid);
+                if(user.email === MESTRE) await setDoc(userRef, { nome: user.displayName, email: user.email, cargo: "criador", photo: user.photoURL }, { merge: true });
                 
-                // Força o cargo se for você
-                if (user.email === RAFAEL_EMAIL) {
-                    await setDoc(userRef, { nome: user.displayName, email: user.email, cargo: "criador", photo: user.photoURL }, { merge: true });
-                } else {
-                    const snap = await getDoc(userRef);
-                    if(!snap.exists()) await setDoc(userRef, { nome: user.displayName, email: user.email, cargo: "minimo", photo: user.photoURL });
-                }
+                const snap = await getDoc(userRef);
+                const uData = snap.data();
+                if(uData?.banido) { alert("VOCÊ FOI BANIDO"); logout(); return; }
 
-                const userData = (await getDoc(userRef)).data();
-                const cargo = userData.cargo || "minimo";
-
-                // INTERFACE
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('dashboard').classList.remove('hidden');
                 document.getElementById('user-name').innerText = user.displayName;
                 document.getElementById('user-photo').src = user.photoURL;
-                document.getElementById('user-status-sidebar').innerText = cargo;
+                document.getElementById('user-status-sidebar').innerText = uData.cargo;
 
-                // PERFIL
-                document.getElementById('conf-name').innerText = user.displayName;
-                document.getElementById('conf-email').innerText = user.email;
-                document.getElementById('conf-photo').src = user.photoURL;
-                document.getElementById('conf-cargo-badge').innerText = "Nível: " + cargo;
-
-                // PERMISSÕES
-                if(['criador', 'admin', 'verificado'].includes(cargo)) document.getElementById('btn-abrir-cadastro').classList.remove('hidden');
-                if(['criador', 'admin'].includes(cargo)) {
+                if(['criador', 'admin', 'verificado'].includes(uData.cargo)) document.getElementById('btn-abrir-cadastro').classList.remove('hidden');
+                if(['criador', 'admin'].includes(uData.cargo)) {
                     document.getElementById('btn-admin-master').classList.remove('hidden');
-                    // Listar Usuários no Painel Mestre
-                    onSnapshot(collection(db, "usuarios"), snap => {
-                        const lista = document.getElementById('lista-gestao-cargos');
-                        lista.innerHTML = "";
-                        snap.forEach(d => {
-                            const u = d.data();
-                            lista.innerHTML += `
-                                <tr>
-                                    <td class="p-6 font-bold text-sm">${u.nome}<br><span class="text-[10px] text-slate-400">${u.email}</span></td>
-                                    <td class="p-6 text-center"><span class="px-3 py-1 bg-slate-100 rounded-lg text-[10px] font-black">${u.cargo}</span></td>
-                                    <td class="p-6 text-right">
-                                        <select onchange="alterarCargo('${d.id}', this.value)" class="text-[10px] border rounded p-1">
-                                            <option value="minimo" ${u.cargo==='minimo'?'selected':''}>MÍNIMO</option>
-                                            <option value="verificado" ${u.cargo==='verificado'?'selected':''}>VERIFICADO</option>
-                                            <option value="admin" ${u.cargo==='admin'?'selected':''}>ADMIN</option>
-                                        </select>
-                                    </td>
-                                </tr>`;
+                    onSnapshot(collection(db, "usuarios"), s => {
+                        const l = document.getElementById('lista-gestao-cargos'); l.innerHTML = "";
+                        s.forEach(d => {
+                            const usr = d.data();
+                            l.innerHTML += `<tr><td class="p-6 font-bold text-sm">${usr.nome}<br><span class="text-slate-400 font-normal text-[10px]">${usr.email}</span></td>
+                                <td class="p-6 text-center"><span class="px-2 py-1 bg-slate-100 rounded text-[10px] font-black">${usr.cargo}</span></td>
+                                <td class="p-6 text-right flex gap-2 justify-end">
+                                    <select onchange="alterarCargo('${d.id}', this.value)" class="text-[10px] border rounded p-1">
+                                        <option value="minimo" ${usr.cargo==='minimo'?'selected':''}>MÍNIMO</option>
+                                        <option value="verificado" ${usr.cargo==='verificado'?'selected':''}>VERIFICADO</option>
+                                        <option value="admin" ${usr.cargo==='admin'?'selected':''}>ADMIN</option>
+                                    </select>
+                                    <button onclick="banirUser('${d.id}', ${!usr.banido})" class="text-[10px] ${usr.banido?'bg-green-500':'bg-red-500'} text-white px-3 py-1 rounded font-bold">${usr.banido?'VOLTAR':'BANIR'}</button>
+                                </td></tr>`;
                         });
                     });
                 }
-
+                
                 // MEUS LINKS
-                onSnapshot(query(collection(db, "afiliacoes"), where("emailAfiliado", "==", user.email)), snap => {
-                    const container = document.getElementById('lista-afiliacoes');
-                    container.innerHTML = "";
-                    snap.forEach(d => {
-                        const l = d.data();
-                        container.innerHTML += `<div class="bg-white p-6 rounded-3xl border shadow-sm">
-                            <h4 class="font-black mb-2">${l.produtoNome}</h4>
-                            <input readonly value="${l.produtoLink}" class="w-full text-[10px] p-2 bg-slate-50 border rounded-lg mb-4">
-                            <a href="${l.produtoLink}" target="_blank" class="block w-full text-center bg-emerald-500 text-white py-2 rounded-xl font-bold">Acessar Site</a>
-                        </div>`;
-                    });
+                onSnapshot(query(collection(db, "afiliacoes"), where("emailAfiliado", "==", user.email)), s => {
+                    const c = document.getElementById('lista-afiliacoes'); c.innerHTML = "";
+                    s.forEach(d => { c.innerHTML += `<div class="bg-white p-6 rounded-2xl border shadow-sm"><h4 class="font-bold mb-2">${d.data().produtoNome}</h4><p class="text-[10px] text-blue-500 mb-4 break-all">${d.data().produtoLink}</p><a href="${d.data().produtoLink}" target="_blank" class="block bg-emerald-500 text-white text-center py-2 rounded-xl font-bold">SITE OFICIAL</a></div>`; });
                 });
 
                 // MERCADO
-                onSnapshot(collection(db, "produtos"), snap => {
-                    const grid = document.getElementById('grid-produtos');
-                    grid.innerHTML = "";
-                    snap.forEach(d => {
+                onSnapshot(collection(db, "produtos"), s => {
+                    const g = document.getElementById('grid-produtos'); g.innerHTML = "";
+                    s.forEach(d => {
                         const p = d.data();
-                        grid.innerHTML += `<div class="bg-white rounded-[30px] border shadow-sm overflow-hidden">
-                            <img src="${p.thumb}" class="h-40 w-full object-cover">
-                            <div class="p-6">
-                                <p class="text-[9px] font-black text-slate-400 mb-2">POSTADO POR: ${p.autorNome}</p>
-                                <h4 class="font-black text-xl mb-4">${p.nome}</h4>
-                                <button onclick="seAfiliar('${d.id}', '${p.nome}', '${p.link}')" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black">AFILIAR-SE</button>
-                            </div>
-                        </div>`;
+                        g.innerHTML += `<div class="bg-white rounded-[30px] border overflow-hidden shadow-sm"><img src="${p.thumb}" class="h-40 w-full object-cover"><div class="p-6"><h4 class="font-black text-lg mb-4">${p.nome}</h4><button onclick="seAfiliar('${d.id}', '${p.nome}', '${p.link}')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold italic">AFILIAR-SE</button></div></div>`;
                     });
                 });
             }
         });
 
-        window.alterarCargo = async (id, novo) => { await updateDoc(doc(db, "usuarios", id), { cargo: novo }); alert("Atualizado!"); };
+        window.salvarProduto = async () => {
+            const p = { nome: document.getElementById('prod-nome').value, preco: document.getElementById('prod-preco').value, thumb: document.getElementById('prod-thumb').value, link: document.getElementById('prod-link').value, desc: document.getElementById('prod-desc').value, autor: auth.currentUser.displayName };
+            await addDoc(collection(db, "produtos"), p); alert("Postado!"); toggleForm();
+        };
+
+        window.seAfiliar = async (id, nome, link) => {
+            const q = query(collection(db, "afiliacoes"), where("emailAfiliado", "==", auth.currentUser.email), where("produtoId", "==", id));
+            if(!(await getDocs(q)).empty) return alert("Já é afiliado!");
+            await addDoc(collection(db, "afiliacoes"), { emailAfiliado: auth.currentUser.email, produtoId: id, produtoNome: nome, produtoLink: link });
+            alert("Sucesso!");
+        };
     </script>
 </body>
 </html>
