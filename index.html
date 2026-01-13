@@ -3,121 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Afiliado Pro - Rafael</title>
+    <title>Afiliado Pro - Sistema de Cargos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-slate-50 min-h-screen font-sans text-slate-900">
 
     <div id="overlay-manutencao" class="hidden fixed inset-0 bg-slate-900 z-[9999] flex items-center justify-center text-center p-6 text-white">
-        <div>
-            <i class="fas fa-tools text-6xl mb-6 text-orange-500 animate-bounce"></i>
-            <h1 class="text-4xl font-bold mb-4">Site em Manutenção</h1>
-            <p class="text-xl text-slate-400">Estamos trabalhando para melhorar sua experiência.<br>Tente novamente mais tarde.</p>
-        </div>
+        <div><i class="fas fa-tools text-6xl mb-6 text-orange-500 animate-bounce"></i><h1 class="text-4xl font-bold">Manutenção</h1></div>
     </div>
 
     <div id="login-screen" class="flex min-h-screen items-center justify-center">
-        <div class="bg-white p-10 rounded-2xl shadow-2xl text-center border w-full max-w-md mx-4">
-            <h1 class="text-3xl font-extrabold mb-6 text-slate-800 tracking-tight">AfiliadoPro</h1>
-            <button onclick="loginGoogle()" class="w-full bg-white border border-gray-300 flex items-center justify-center px-4 py-3 rounded-xl hover:bg-gray-50 transition shadow-sm font-bold">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 mr-3"> Entrar com Google
+        <div class="bg-white p-10 rounded-[40px] shadow-2xl text-center w-full max-w-md border border-slate-100">
+            <h1 class="text-4xl font-black mb-8 text-slate-800 italic">AFILIADO<span class="text-blue-600">PRO</span></h1>
+            <button onclick="loginGoogle()" class="w-full bg-slate-900 text-white flex items-center justify-center px-4 py-4 rounded-2xl hover:bg-black transition font-bold">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 mr-3 bg-white p-0.5 rounded-full"> Entrar com Google
             </button>
         </div>
     </div>
 
     <div id="dashboard" class="hidden min-h-screen flex flex-col md:flex-row">
         
-        <aside class="w-full md:w-72 bg-slate-900 text-white p-6 flex flex-col">
-            <div class="flex flex-col items-center pb-8 border-b border-slate-700 mb-6 text-center">
-                <img id="user-photo" src="" class="w-20 h-20 rounded-full border-4 border-blue-500 shadow-lg mb-4 object-cover">
-                <h3 id="user-name" class="font-bold text-lg leading-tight"></h3>
-                <span id="admin-badge" class="hidden bg-red-600 text-[10px] font-bold px-3 py-1 rounded-full mt-2 uppercase tracking-widest">Master Admin</span>
+        <aside class="w-full md:w-72 bg-white border-r border-slate-200 p-6 flex flex-col">
+            <div class="flex flex-col items-center pb-8 border-b mb-6 text-center">
+                <img id="user-photo" src="" class="w-20 h-20 rounded-2xl shadow-md mb-4 object-cover border-4 border-white ring-2 ring-slate-100">
+                <h3 id="user-name" class="font-bold text-slate-800 leading-tight"></h3>
+                <div id="user-status-sidebar" class="mt-2 text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-wider"></div>
             </div>
 
             <nav class="space-y-2 flex-1">
-                <button onclick="showTab('home')" class="w-full text-left p-4 rounded-xl hover:bg-slate-800 transition"><i class="fas fa-home mr-3"></i> Home</button>
-                <button onclick="showTab('afiliacoes')" class="w-full text-left p-4 rounded-xl hover:bg-slate-800 transition"><i class="fas fa-handshake mr-3"></i> Minhas Afiliações</button>
-                <button id="btn-admin-master" onclick="showTab('admin-master')" class="hidden w-full text-left p-4 rounded-xl bg-red-900/20 text-red-400 hover:bg-red-900/40 transition border border-red-900/30"><i class="fas fa-user-shield mr-3"></i> Painel Mestre</button>
-                <button onclick="showTab('config')" class="w-full text-left p-4 rounded-xl hover:bg-slate-800 transition"><i class="fas fa-cog mr-3"></i> Configurações</button>
+                <button onclick="showTab('home')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-100 transition font-bold text-slate-600"><i class="fas fa-store mr-3 text-blue-500"></i> Mercado</button>
+                <button onclick="showTab('afiliacoes')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-100 transition font-bold text-slate-600"><i class="fas fa-check-double mr-3 text-emerald-500"></i> Minhas Vendas</button>
+                <button id="btn-admin-master" onclick="showTab('admin-master')" class="hidden w-full text-left p-4 rounded-2xl bg-red-50 text-red-600 hover:bg-red-100 transition font-bold border border-red-100"><i class="fas fa-crown mr-3"></i> Painel Mestre</button>
+                <button onclick="showTab('config')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-100 transition font-bold text-slate-600"><i class="fas fa-user mr-3 text-purple-500"></i> Meu Perfil</button>
             </nav>
-
-            <button onclick="logout()" class="mt-10 p-4 text-slate-400 hover:text-red-400 text-left transition italic">
-                <i class="fas fa-sign-out-alt mr-2"></i> Sair do Sistema
-            </button>
+            <button onclick="logout()" class="mt-10 p-4 text-slate-400 hover:text-red-500 font-bold transition">Sair</button>
         </aside>
 
         <main class="flex-1 p-8">
             
             <section id="tab-home">
-                <h2 class="text-3xl font-bold text-slate-800 mb-8">Produtos</h2>
-                <div id="admin-panel" class="hidden bg-white p-6 rounded-2xl shadow-sm border mb-8">
-                    <h3 class="font-bold mb-4 text-slate-700">Novo Produto</h3>
+                <h2 class="text-4xl font-black text-slate-800 mb-10">Produtos Disponíveis</h2>
+                
+                <div id="admin-panel" class="hidden bg-slate-900 p-8 rounded-[35px] shadow-xl mb-12 text-white">
+                    <h3 class="text-xl font-bold mb-6 flex items-center"><i class="fas fa-plus-circle mr-3"></i> Novo Infoproduto</h3>
                     <div class="flex flex-wrap gap-4">
-                        <input id="prod-nome" type="text" placeholder="Nome" class="flex-1 min-w-[200px] p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
-                        <input id="prod-preco" type="number" placeholder="Preço R$" class="w-32 p-3 border rounded-xl outline-none">
-                        <button onclick="salvarProduto()" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">Publicar</button>
+                        <input id="prod-nome" type="text" placeholder="Nome do produto" class="flex-1 min-w-[200px] p-4 bg-slate-800 rounded-2xl outline-none border border-slate-700">
+                        <input id="prod-preco" type="number" placeholder="Preço" class="w-32 p-4 bg-slate-800 rounded-2xl outline-none border border-slate-700">
+                        <button onclick="salvarProduto()" class="bg-blue-600 px-8 py-4 rounded-2xl font-black hover:bg-blue-500 transition shadow-lg">LANÇAR</button>
                     </div>
                 </div>
-                <div id="grid-produtos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                <div id="grid-produtos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
             </section>
 
             <section id="tab-admin-master" class="hidden">
-                <h2 class="text-3xl font-bold text-red-600 mb-8 font-serif">Painel de Controle Mestre</h2>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-orange-100">
-                        <h3 class="text-xl font-bold mb-6 text-slate-800 flex items-center"><i class="fas fa-power-off mr-3 text-orange-500"></i> Status do Sistema</h3>
-                        <p class="text-sm text-gray-500 mb-6">Ao ativar, todos os usuários (exceto você) serão bloqueados por uma tela de manutenção.</p>
-                        <div class="flex gap-4">
-                            <button onclick="alternarManutencao(true)" class="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-2xl transition">ATIVAR MANUTENÇÃO</button>
-                            <button onclick="alternarManutencao(false)" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 rounded-2xl transition">NORMALIZAR</button>
-                        </div>
+                <h2 class="text-4xl font-black text-red-600 mb-10">Gestão de Hierarquia</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-3xl border border-orange-100 shadow-sm">
+                        <h3 class="font-bold mb-4">Manutenção</h3>
+                        <button onclick="alternarManutencao(true)" class="bg-orange-500 text-white px-4 py-2 rounded-xl font-bold">LIGAR</button>
+                        <button onclick="alternarManutencao(false)" class="bg-green-500 text-white px-4 py-2 rounded-xl font-bold">DESLIGAR</button>
                     </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-red-100">
-                        <h3 class="text-xl font-bold mb-6 text-slate-800 flex items-center"><i class="fas fa-user-slash mr-3 text-red-500"></i> Banir Usuário</h3>
-                        <input id="email-ban" type="email" placeholder="E-mail do usuário para banir" class="w-full p-4 border rounded-2xl mb-4 outline-none focus:border-red-500">
-                        <button onclick="banirUsuario()" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-4 rounded-2xl transition uppercase tracking-widest">Confirmar Banimento</button>
+                    <div class="bg-white p-6 rounded-3xl border border-red-100 shadow-sm">
+                        <h3 class="font-bold mb-4 text-red-600">Banir Usuário</h3>
+                        <input id="email-ban" type="text" class="w-full p-2 border rounded-xl mb-2" placeholder="email@teste.com">
+                        <button onclick="banirUsuario()" class="w-full bg-red-600 text-white py-2 rounded-xl font-bold">CONFIRMAR</button>
                     </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border col-span-full">
-                        <h3 class="text-xl font-bold mb-6 text-slate-800">Usuários Registrados</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left">
-                                <thead>
-                                    <tr class="text-gray-400 text-sm border-b">
-                                        <th class="pb-4">Nome</th>
-                                        <th class="pb-4">E-mail</th>
-                                        <th class="pb-4 text-right">Ação</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="lista-usuarios-admin" class="text-slate-700 font-medium"></tbody>
-                            </table>
-                        </div>
-                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-[35px] border shadow-sm">
+                    <table class="w-full text-left">
+                        <thead class="text-xs text-slate-400 border-b"><tr class="uppercase"> <th class="pb-4">Membro</th> <th class="pb-4">Nível</th> <th class="pb-4 text-right">Alterar Cargo</th> </tr></thead>
+                        <tbody id="lista-gestao-cargos" class="divide-y divide-slate-50"></tbody>
+                    </table>
                 </div>
             </section>
 
-            <section id="tab-afiliacoes" class="hidden">
-                <h2 class="text-3xl font-bold mb-8">Minhas Afiliações</h2>
-                <div id="lista-afiliacoes" class="bg-white rounded-2xl border p-6 text-gray-400 italic">Você ainda não tem afiliações.</div>
-            </section>
-
+            <section id="tab-afiliacoes" class="hidden"><h2 class="text-4xl font-black mb-10">Minhas Afiliações</h2><div id="lista-afiliacoes" class="grid grid-cols-1 gap-4"></div></section>
             <section id="tab-config" class="hidden">
-                <h2 class="text-3xl font-bold mb-8">Configurações</h2>
-                <div class="bg-white p-8 rounded-3xl shadow-sm border max-w-xl">
-                    <div class="flex items-center space-x-6 mb-8">
-                        <img id="conf-photo" src="" class="w-20 h-20 rounded-full border-4 border-gray-100">
-                        <div>
-                            <h3 id="conf-name" class="text-2xl font-bold text-slate-800"></h3>
-                            <p id="conf-email" class="text-gray-400"></p>
-                        </div>
+                <h2 class="text-3xl font-black mb-10">Perfil</h2>
+                <div class="bg-white p-10 rounded-[40px] border max-w-2xl shadow-sm">
+                    <div class="flex items-center gap-6 mb-6">
+                        <img id="conf-photo" src="" class="w-24 h-24 rounded-3xl shadow-lg border-4 border-white">
+                        <div><h3 id="conf-name" class="text-3xl font-black text-slate-800"></h3><p id="conf-email" class="text-slate-400"></p></div>
                     </div>
-                    <div class="pt-6 border-t">
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Nível de Acesso</p>
-                        <span id="user-status" class="px-4 py-2 rounded-xl text-xs font-black uppercase"></span>
-                    </div>
+                    <div id="badge-config" class="inline-block px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest"></div>
                 </div>
             </section>
         </main>
@@ -126,9 +95,8 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, doc, deleteDoc, onSnapshot, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, deleteDoc, onSnapshot, setDoc, getDoc, query, where, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // CONFIGURAÇÃO DO SEU FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyDhebhWNET0qK1yA09WYiGayg2vp6fZtmE",
             authDomain: "site-administrativo.firebaseapp.com",
@@ -146,58 +114,49 @@
 
         window.loginGoogle = () => signInWithPopup(auth, provider);
         window.logout = () => signOut(auth);
-
-        window.showTab = (tabName) => {
+        window.showTab = (name) => {
             ['home', 'afiliacoes', 'config', 'admin-master'].forEach(t => document.getElementById(`tab-${t}`).classList.add('hidden'));
-            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${name}`).classList.remove('hidden');
         };
 
-        // --- SISTEMA DE MANUTENÇÃO ---
-        onSnapshot(doc(db, "configuracoes", "geral"), (snap) => {
-            if (snap.exists() && snap.data().manutencao === true && auth.currentUser?.email !== ADMIN_EMAIL) {
-                document.getElementById('overlay-manutencao').classList.remove('hidden');
-            } else {
-                document.getElementById('overlay-manutencao').classList.add('hidden');
-            }
-        });
-
-        window.alternarManutencao = async (status) => {
-            await setDoc(doc(db, "configuracoes", "geral"), { manutencao: status });
-            alert(status ? "MODO MANUTENÇÃO ATIVADO!" : "SISTEMA LIBERADO!");
+        const getBadgeStyle = (cargo) => {
+            const styles = {
+                criador: "bg-purple-100 text-purple-700 border-purple-200",
+                admin: "bg-red-100 text-red-700 border-red-200",
+                suport: "bg-blue-100 text-blue-700 border-blue-200",
+                verificado: "bg-emerald-100 text-emerald-700 border-emerald-200",
+                minimo: "bg-slate-100 text-slate-500 border-slate-200"
+            };
+            return styles[cargo] || styles.minimo;
         };
 
-        // --- SISTEMA DE USUÁRIOS ---
-        const registrarUsuario = async (user) => {
-            await setDoc(doc(db, "usuarios", user.uid), {
-                nome: user.displayName,
-                email: user.email,
-                foto: user.photoURL,
-                ultimoAcesso: new Date()
-            }, { merge: true });
-        };
-
-        window.banirUsuario = async () => {
-            const email = document.getElementById('email-ban').value;
-            if(!email) return;
-            if(confirm(`Banir definitivamente o e-mail: ${email}?`)) {
-                await setDoc(doc(db, "banidos", email), { data: new Date() });
-                alert("Usuário banido!");
-                document.getElementById('email-ban').value = "";
+        // --- SISTEMA DE CARGOS ---
+        window.alterarCargo = async (uid, novoCargo) => {
+            if(confirm(`Mudar para ${novoCargo}?`)) {
+                await updateDoc(doc(db, "usuarios", uid), { cargo: novoCargo });
+                alert("Cargo atualizado!");
             }
         };
 
-        const carregarListaUsuarios = () => {
+        const carregarGestaoCargos = () => {
             onSnapshot(collection(db, "usuarios"), (snap) => {
-                const lista = document.getElementById('lista-usuarios-admin');
+                const lista = document.getElementById('lista-gestao-cargos');
                 lista.innerHTML = "";
                 snap.forEach(d => {
                     const u = d.data();
+                    const cargo = u.cargo || "minimo";
                     lista.innerHTML += `
-                        <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
-                            <td class="py-4 text-sm">${u.nome}</td>
-                            <td class="py-4 text-sm text-gray-500">${u.email}</td>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-4 font-bold text-sm">${u.nome}<br><span class="text-[10px] text-slate-400 font-normal">${u.email}</span></td>
+                            <td class="py-4"><span class="px-3 py-1 rounded-full text-[9px] font-black border ${getBadgeStyle(cargo)}">${cargo.toUpperCase()}</span></td>
                             <td class="py-4 text-right">
-                                <button onclick="document.getElementById('email-ban').value='${u.email}'" class="text-blue-500 text-xs font-bold hover:underline">SELECIONAR</button>
+                                <select onchange="alterarCargo('${d.id}', this.value)" class="text-[10px] border p-1 rounded-lg">
+                                    <option value="minimo" ${cargo === 'minimo' ? 'selected' : ''}>MÍNIMO</option>
+                                    <option value="verificado" ${cargo === 'verificado' ? 'selected' : ''}>VERIFICADO</option>
+                                    <option value="suport" ${cargo === 'suport' ? 'selected' : ''}>SUPORTE</option>
+                                    <option value="admin" ${cargo === 'admin' ? 'selected' : ''}>ADMIN</option>
+                                    <option value="criador" ${cargo === 'criador' ? 'selected' : ''}>CRIADOR</option>
+                                </select>
                             </td>
                         </tr>
                     `;
@@ -205,17 +164,18 @@
             });
         };
 
-        // --- PRODUTOS ---
+        // --- PRODUTOS & AFILIACAO ---
         window.salvarProduto = async () => {
             const nome = document.getElementById('prod-nome').value;
             const preco = document.getElementById('prod-preco').value;
             if(!nome || !preco) return;
-            await addDoc(collection(db, "produtos"), { nome, precoOriginal: Number(preco), data: new Date() });
+            await addDoc(collection(db, "produtos"), { nome, precoOriginal: Number(preco), criadoPor: auth.currentUser.email });
             document.getElementById('prod-nome').value = ""; document.getElementById('prod-preco').value = "";
         };
 
-        window.removerProduto = async (id) => {
-            if(confirm("Remover este produto permanentemente?")) await deleteDoc(doc(db, "produtos", id));
+        window.seAfiliar = async (id, nome) => {
+            await addDoc(collection(db, "afiliacoes"), { emailAfiliado: auth.currentUser.email, produtoId: id, produtoNome: nome });
+            alert("Afiliado com sucesso!");
         };
 
         onSnapshot(collection(db, "produtos"), (snapshot) => {
@@ -223,52 +183,55 @@
             grid.innerHTML = "";
             snapshot.forEach(docSnap => {
                 const p = docSnap.data();
-                const id = docSnap.id;
-                const isAdmin = auth.currentUser?.email === ADMIN_EMAIL;
                 grid.innerHTML += `
-                    <div class="bg-white rounded-3xl shadow-sm border p-6 relative">
-                        ${isAdmin ? `<button onclick="removerProduto('${id}')" class="absolute top-4 right-4 text-red-300 hover:text-red-500"><i class="fas fa-trash"></i></button>` : ''}
-                        <h4 class="font-bold text-xl mb-1">${p.nome}</h4>
-                        <p class="text-gray-400 text-sm mb-4">Público: <span class="line-through">R$ ${p.precoOriginal}</span></p>
-                        <div class="bg-green-50 p-4 rounded-2xl mb-4 border border-green-100">
-                            <p class="text-green-600 text-xs font-bold uppercase tracking-widest">Preço Afiliado</p>
-                            <p class="text-green-700 font-black text-2xl">R$ 50,00</p>
-                        </div>
-                        <button onclick="seAfiliar('${id}', '${p.nome}')" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl hover:bg-black transition">AFILIAR-SE AGORA</button>
+                    <div class="bg-white rounded-[35px] shadow-sm border p-8">
+                        <h4 class="font-black text-2xl mb-1">${p.nome}</h4>
+                        <p class="text-slate-400 text-sm mb-6 line-through">R$ ${p.precoOriginal}</p>
+                        <div class="bg-blue-50 p-6 rounded-2xl mb-6"><p class="text-blue-700 font-black text-3xl">R$ 50,00</p></div>
+                        <button onclick="seAfiliar('${docSnap.id}', '${p.nome}')" class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-blue-600 transition shadow-lg">AFILIAR-SE</button>
                     </div>
                 `;
             });
         });
 
-        // --- MONITORAR LOGIN ---
+        // --- AUTH ---
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // Verificar Banimento
-                const ban = await getDoc(doc(db, "banidos", user.email));
-                if (ban.exists() && user.email !== ADMIN_EMAIL) {
-                    alert("Acesso negado: Sua conta foi banida.");
-                    logout(); return;
+                const userDocRef = doc(db, "usuarios", user.uid);
+                let userDoc = await getDoc(userDocRef);
+                
+                if(!userDoc.exists()) {
+                    const inicial = { nome: user.displayName, email: user.email, photo: user.photoURL, cargo: user.email === ADMIN_EMAIL ? "criador" : "minimo" };
+                    await setDoc(userDocRef, inicial);
+                    userDoc = await getDoc(userDocRef);
                 }
 
-                registrarUsuario(user);
+                const userData = userDoc.data();
+                const cargo = userData.cargo || "minimo";
+
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('dashboard').classList.remove('hidden');
                 document.getElementById('user-name').innerText = user.displayName;
                 document.getElementById('user-photo').src = user.photoURL;
-                document.getElementById('conf-name').innerText = user.displayName;
-                document.getElementById('conf-email').innerText = user.email;
-                document.getElementById('conf-photo').src = user.photoURL;
 
-                const isAdmin = user.email === ADMIN_EMAIL;
-                if(isAdmin) {
-                    document.querySelectorAll('#admin-panel, #admin-badge, #btn-admin-master').forEach(el => el.classList.remove('hidden'));
-                    document.getElementById('user-status').innerText = "Master Admin";
-                    document.getElementById('user-status').className = "px-4 py-2 rounded-xl text-xs font-black uppercase bg-red-100 text-red-600 border border-red-200";
-                    carregarListaUsuarios();
-                } else {
-                    document.getElementById('user-status').innerText = "Afiliado Verificado";
-                    document.getElementById('user-status').className = "px-4 py-2 rounded-xl text-xs font-black uppercase bg-green-100 text-green-600 border border-green-200";
+                // Restrições de UI por cargo
+                if(['criador', 'admin', 'verificado'].includes(cargo)) document.getElementById('admin-panel').classList.remove('hidden');
+                if(['criador', 'admin', 'suport'].includes(cargo)) {
+                    document.getElementById('btn-admin-master').classList.remove('hidden');
+                    carregarGestaoCargos();
                 }
+
+                // Badge Sidebar
+                const badge = document.getElementById('user-status-sidebar');
+                badge.className = `mt-2 text-[10px] font-black px-3 py-1 rounded-lg uppercase border ${getBadgeStyle(cargo)}`;
+                badge.innerText = cargo;
+
+                // Carregar Minhas Afiliacoes
+                onSnapshot(query(collection(db, "afiliacoes"), where("emailAfiliado", "==", user.email)), snap => {
+                    const container = document.getElementById('lista-afiliacoes');
+                    container.innerHTML = "";
+                    snap.forEach(d => container.innerHTML += `<div class="bg-white p-6 rounded-2xl border shadow-sm font-bold text-slate-800">${d.data().produtoNome}</div>`);
+                });
             } else {
                 document.getElementById('login-screen').classList.remove('hidden');
                 document.getElementById('dashboard').classList.add('hidden');
