@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afiliado Pro - Mestre</title>
+    <title>Afiliado Pro - Versão Final</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 min-h-screen font-sans text-slate-900">
+<body class="bg-slate-50 min-h-screen font-sans">
 
-    <div id="manutencao-screen" class="hidden fixed inset-0 bg-slate-900 z-[9999] flex items-center justify-center text-center p-6 text-white">
-        <div><i class="fas fa-tools text-6xl mb-6 text-orange-500 animate-bounce"></i><h1 class="text-4xl font-bold">EM MANUTENÇÃO</h1><p class="mt-4 text-slate-400">Voltaremos em breve com novidades!</p></div>
+    <div id="manutencao-screen" class="hidden fixed inset-0 bg-slate-900 z-[9999] flex items-center justify-center text-white">
+        <div class="text-center"><i class="fas fa-tools text-6xl text-orange-500 mb-4 animate-bounce"></i><h1 class="text-2xl font-bold">SISTEMA EM MANUTENÇÃO</h1></div>
     </div>
 
     <div id="login-screen" class="flex min-h-screen items-center justify-center">
         <div class="bg-white p-10 rounded-[40px] shadow-2xl text-center w-full max-w-md border">
             <h1 class="text-4xl font-black mb-8 italic">AFILIADO<span class="text-blue-600">PRO</span></h1>
-            <button onclick="loginGoogle()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl">Entrar com Google</button>
+            <button onclick="loginGoogle()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold">Entrar com Google</button>
         </div>
     </div>
 
@@ -24,65 +24,59 @@
         
         <aside class="w-full md:w-72 bg-slate-900 text-white p-6 flex flex-col">
             <div class="flex flex-col items-center pb-8 border-b border-slate-800 mb-6 text-center">
-                <img id="user-photo" src="" class="w-20 h-20 rounded-3xl mb-4 border-2 border-blue-500 p-1">
+                <img id="user-photo" src="" class="w-20 h-20 rounded-2xl mb-4 border-2 border-blue-500 p-1 object-cover">
                 <h3 id="user-name" class="font-bold"></h3>
                 <div id="user-status-sidebar" class="mt-2 text-[10px] font-black px-3 py-1 rounded-lg uppercase bg-blue-600"></div>
             </div>
-
             <nav class="space-y-2 flex-1">
-                <button onclick="showTab('home')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-store mr-3"></i> Mercado</button>
-                <button onclick="showTab('afiliacoes')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-link mr-3"></i> Meus Links</button>
-                <button id="btn-admin-master" onclick="showTab('admin-master')" class="hidden w-full text-left p-4 rounded-2xl bg-red-600 text-white font-bold"><i class="fas fa-crown mr-3"></i> Painel Mestre</button>
-                <button onclick="showTab('config')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 transition font-bold"><i class="fas fa-user mr-3"></i> Perfil</button>
+                <button onclick="showTab('home')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 font-bold"><i class="fas fa-store mr-3"></i> Mercado</button>
+                <button onclick="showTab('afiliacoes')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 font-bold"><i class="fas fa-link mr-3"></i> Meus Links</button>
+                <button id="btn-admin-master" onclick="showTab('admin-master')" class="hidden w-full text-left p-4 rounded-2xl bg-red-600 font-bold"><i class="fas fa-crown mr-3"></i> Painel Mestre</button>
+                <button onclick="showTab('config')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-800 font-bold"><i class="fas fa-user mr-3"></i> Perfil</button>
             </nav>
             <button onclick="logout()" class="p-4 text-slate-500 hover:text-white font-bold">Sair</button>
         </aside>
 
-        <main class="flex-1 p-8">
-            
+        <main class="flex-1 p-8 overflow-y-auto">
             <section id="tab-home">
                 <div class="flex justify-between items-center mb-10">
                     <h2 class="text-4xl font-black">Mercado</h2>
                     <button id="btn-abrir-cadastro" onclick="toggleForm()" class="hidden bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold">+ Novo Produto</button>
                 </div>
-                <div id="admin-panel" class="hidden bg-white p-8 rounded-[30px] shadow-sm border mb-8">
+                <div id="admin-panel" class="hidden bg-white p-8 rounded-[30px] border mb-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input id="prod-nome" type="text" placeholder="Nome" class="p-4 bg-slate-50 rounded-xl border">
-                        <input id="prod-preco" type="number" placeholder="Preço" class="p-4 bg-slate-50 rounded-xl border">
-                        <input id="prod-thumb" type="text" placeholder="Link da Imagem" class="p-4 bg-slate-50 rounded-xl border">
-                        <input id="prod-link" type="text" placeholder="Link de Afiliado" class="p-4 bg-slate-50 rounded-xl border">
+                        <input id="prod-nome" placeholder="Nome do Produto" class="p-4 bg-slate-50 rounded-xl border">
+                        <input id="prod-preco" placeholder="Preço (R$)" class="p-4 bg-slate-50 rounded-xl border">
+                        <input id="prod-thumb" placeholder="URL da Foto do Produto" class="p-4 bg-slate-50 rounded-xl border">
+                        <input id="prod-link" placeholder="Link do Site" class="p-4 bg-slate-50 rounded-xl border">
                         <textarea id="prod-desc" placeholder="Descrição" class="p-4 bg-slate-50 rounded-xl border md:col-span-2"></textarea>
-                        <button onclick="salvarProduto()" class="md:col-span-2 bg-slate-900 text-white py-4 rounded-xl font-bold">POSTAR PRODUTO</button>
+                        <button onclick="salvarProduto()" class="md:col-span-2 bg-slate-900 text-white py-4 rounded-xl font-bold">LANÇAR PRODUTO</button>
                     </div>
                 </div>
                 <div id="grid-produtos" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
             </section>
 
-            <section id="tab-admin-master" class="hidden">
-                <h2 class="text-4xl font-black text-red-600 mb-8">Painel de Controle</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                    <div class="bg-white p-6 rounded-3xl border shadow-sm">
-                        <h3 class="font-bold mb-4">Sistema de Manutenção</h3>
-                        <div class="flex gap-2">
-                            <button onclick="setManutencao(true)" class="bg-orange-500 text-white px-6 py-2 rounded-xl font-bold">LIGAR</button>
-                            <button onclick="setManutencao(false)" class="bg-emerald-500 text-white px-6 py-2 rounded-xl font-bold">DESLIGAR</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[30px] border shadow-sm overflow-hidden">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-50 border-b font-bold text-xs uppercase text-slate-400">
-                            <tr><th class="p-6">Usuário</th><th class="p-6">Cargo</th><th class="p-6 text-right">Ações</th></tr>
-                        </thead>
-                        <tbody id="lista-gestao-cargos" class="divide-y"></tbody>
-                    </table>
-                </div>
+            <section id="tab-afiliacoes" class="hidden">
+                <h2 class="text-4xl font-black mb-10">Meus Links</h2>
+                <div id="lista-afiliacoes" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
             </section>
 
-            <section id="tab-afiliacoes" class="hidden"><h2 class="text-4xl font-black mb-8">Meus Links</h2><div id="lista-afiliacoes" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></section>
-            <section id="tab-config" class="hidden"><h2 class="text-4xl font-black mb-8">Meu Perfil</h2><div id="perfil-info" class="bg-white p-8 rounded-3xl border shadow-sm"></div></section>
+            <section id="tab-config" class="hidden">
+                <h2 class="text-4xl font-black mb-10">Meu Perfil</h2>
+                <div id="perfil-card" class="bg-white p-10 rounded-[40px] border shadow-sm max-w-xl flex items-center gap-8">
+                    </div>
+            </section>
+
+            <section id="tab-admin-master" class="hidden">
+                <h2 class="text-4xl font-black text-red-600 mb-8">Gestão Mestre</h2>
+                <div class="flex gap-4 mb-8">
+                    <button onclick="setManutencao(true)" class="bg-orange-500 text-white px-6 py-2 rounded-xl font-bold">LIGAR MANUTENÇÃO</button>
+                    <button onclick="setManutencao(false)" class="bg-emerald-500 text-white px-6 py-2 rounded-xl font-bold">DESLIGAR</button>
+                </div>
+                <div class="bg-white rounded-[30px] border overflow-hidden">
+                    <table class="w-full text-left"><tbody id="lista-gestao-cargos"></tbody></table>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -108,23 +102,22 @@
 
         window.loginGoogle = () => signInWithPopup(auth, provider);
         window.logout = () => signOut(auth);
+        window.toggleForm = () => document.getElementById('admin-panel').classList.toggle('hidden');
         window.showTab = (name) => {
             ['home', 'afiliacoes', 'config', 'admin-master'].forEach(t => document.getElementById(`tab-${t}`).classList.add('hidden'));
             document.getElementById(`tab-${name}`).classList.remove('hidden');
         };
-        window.toggleForm = () => document.getElementById('admin-panel').classList.toggle('hidden');
+
+        // REMOVER PRODUTO
+        window.removerProduto = async (id) => { if(confirm("Deseja apagar este produto?")) await deleteDoc(doc(db, "produtos", id)); };
 
         // MANUTENÇÃO
-        window.setManutencao = async (val) => { await setDoc(doc(db, "configuracoes", "geral"), { status: val }); };
+        window.setManutencao = async (v) => await setDoc(doc(db, "configuracoes", "geral"), { status: v });
         onSnapshot(doc(db, "configuracoes", "geral"), snap => {
             if(snap.exists() && snap.data().status && auth.currentUser?.email !== MESTRE) {
                 document.getElementById('manutencao-screen').classList.remove('hidden');
             } else { document.getElementById('manutencao-screen').classList.add('hidden'); }
         });
-
-        // CARGOS E BAN
-        window.alterarCargo = async (id, cargo) => { await updateDoc(doc(db, "usuarios", id), { cargo }); };
-        window.banirUser = async (id, status) => { await updateDoc(doc(db, "usuarios", id), { banido: status }); alert(status ? "BANIDO" : "DESBANIDO"); };
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -132,14 +125,22 @@
                 if(user.email === MESTRE) await setDoc(userRef, { nome: user.displayName, email: user.email, cargo: "criador", photo: user.photoURL }, { merge: true });
                 
                 const snap = await getDoc(userRef);
-                const uData = snap.data();
-                if(uData?.banido) { alert("VOCÊ FOI BANIDO"); logout(); return; }
+                const uData = snap.data() || { cargo: "minimo" };
 
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('dashboard').classList.remove('hidden');
                 document.getElementById('user-name').innerText = user.displayName;
                 document.getElementById('user-photo').src = user.photoURL;
                 document.getElementById('user-status-sidebar').innerText = uData.cargo;
+
+                // ABA PERFIL
+                document.getElementById('perfil-card').innerHTML = `
+                    <img src="${user.photoURL}" class="w-24 h-24 rounded-full border-4 border-blue-500">
+                    <div>
+                        <h3 class="text-2xl font-black">${user.displayName}</h3>
+                        <p class="text-slate-400">${user.email}</p>
+                        <span class="mt-2 inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-lg font-bold uppercase text-[10px]">${uData.cargo}</span>
+                    </div>`;
 
                 if(['criador', 'admin', 'verificado'].includes(uData.cargo)) document.getElementById('btn-abrir-cadastro').classList.remove('hidden');
                 if(['criador', 'admin'].includes(uData.cargo)) {
@@ -148,47 +149,72 @@
                         const l = document.getElementById('lista-gestao-cargos'); l.innerHTML = "";
                         s.forEach(d => {
                             const usr = d.data();
-                            l.innerHTML += `<tr><td class="p-6 font-bold text-sm">${usr.nome}<br><span class="text-slate-400 font-normal text-[10px]">${usr.email}</span></td>
-                                <td class="p-6 text-center"><span class="px-2 py-1 bg-slate-100 rounded text-[10px] font-black">${usr.cargo}</span></td>
-                                <td class="p-6 text-right flex gap-2 justify-end">
-                                    <select onchange="alterarCargo('${d.id}', this.value)" class="text-[10px] border rounded p-1">
-                                        <option value="minimo" ${usr.cargo==='minimo'?'selected':''}>MÍNIMO</option>
-                                        <option value="verificado" ${usr.cargo==='verificado'?'selected':''}>VERIFICADO</option>
-                                        <option value="admin" ${usr.cargo==='admin'?'selected':''}>ADMIN</option>
-                                    </select>
-                                    <button onclick="banirUser('${d.id}', ${!usr.banido})" class="text-[10px] ${usr.banido?'bg-green-500':'bg-red-500'} text-white px-3 py-1 rounded font-bold">${usr.banido?'VOLTAR':'BANIR'}</button>
-                                </td></tr>`;
+                            l.innerHTML += `<tr class="border-b"><td class="p-6 font-bold">${usr.nome}<br><span class="text-slate-400 font-normal text-xs">${usr.email}</span></td>
+                                <td class="p-6 text-right"><select onchange="updateDoc(doc(db, 'usuarios', '${d.id}'), {cargo: this.value})" class="text-xs border rounded p-1">
+                                    <option value="minimo" ${usr.cargo==='minimo'?'selected':''}>MÍNIMO</option>
+                                    <option value="verificado" ${usr.cargo==='verificado'?'selected':''}>VERIFICADO</option>
+                                    <option value="admin" ${usr.cargo==='admin'?'selected':''}>ADMIN</option>
+                                </select></td></tr>`;
                         });
                     });
                 }
-                
-                // MEUS LINKS
-                onSnapshot(query(collection(db, "afiliacoes"), where("emailAfiliado", "==", user.email)), s => {
-                    const c = document.getElementById('lista-afiliacoes'); c.innerHTML = "";
-                    s.forEach(d => { c.innerHTML += `<div class="bg-white p-6 rounded-2xl border shadow-sm"><h4 class="font-bold mb-2">${d.data().produtoNome}</h4><p class="text-[10px] text-blue-500 mb-4 break-all">${d.data().produtoLink}</p><a href="${d.data().produtoLink}" target="_blank" class="block bg-emerald-500 text-white text-center py-2 rounded-xl font-bold">SITE OFICIAL</a></div>`; });
-                });
 
-                // MERCADO
+                // MERCADO + QUEM POSTOU + REMOVER
                 onSnapshot(collection(db, "produtos"), s => {
                     const g = document.getElementById('grid-produtos'); g.innerHTML = "";
                     s.forEach(d => {
                         const p = d.data();
-                        g.innerHTML += `<div class="bg-white rounded-[30px] border overflow-hidden shadow-sm"><img src="${p.thumb}" class="h-40 w-full object-cover"><div class="p-6"><h4 class="font-black text-lg mb-4">${p.nome}</h4><button onclick="seAfiliar('${d.id}', '${p.nome}', '${p.link}')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold italic">AFILIAR-SE</button></div></div>`;
+                        const podeRemover = (uData.cargo === 'criador' || uData.cargo === 'admin');
+                        g.innerHTML += `
+                            <div class="bg-white rounded-[30px] border shadow-sm overflow-hidden relative">
+                                ${podeRemover ? `<button onclick="removerProduto('${d.id}')" class="absolute top-4 right-4 bg-red-500 text-white w-8 h-8 rounded-full shadow-lg"><i class="fas fa-trash-alt text-xs"></i></button>` : ''}
+                                <img src="${p.thumb}" class="h-40 w-full object-cover">
+                                <div class="p-6">
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <img src="${p.autorFoto || 'https://via.placeholder.com/50'}" class="w-6 h-6 rounded-full border">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase">${p.autorNome || 'Desconhecido'}</span>
+                                    </div>
+                                    <h4 class="font-black text-xl mb-4">${p.nome}</h4>
+                                    <button onclick="seAfiliar('${d.id}', '${p.nome}', '${p.link}')" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold">AFILIAR-SE</button>
+                                </div>
+                            </div>`;
+                    });
+                });
+
+                // MEUS LINKS
+                onSnapshot(query(collection(db, "afiliacoes"), where("emailAfiliado", "==", user.email)), s => {
+                    const c = document.getElementById('lista-afiliacoes'); c.innerHTML = "";
+                    s.forEach(d => {
+                        const l = d.data();
+                        c.innerHTML += `<div class="bg-white p-6 rounded-3xl border shadow-sm">
+                            <h4 class="font-bold mb-2">${l.produtoNome}</h4>
+                            <div class="p-3 bg-slate-50 rounded-xl border text-[10px] font-mono mb-4 truncate text-blue-600">${l.produtoLink}</div>
+                            <a href="${l.produtoLink}" target="_blank" class="block bg-emerald-500 text-white text-center py-2 rounded-xl font-bold">ACESSAR SITE</a>
+                        </div>`;
                     });
                 });
             }
         });
 
         window.salvarProduto = async () => {
-            const p = { nome: document.getElementById('prod-nome').value, preco: document.getElementById('prod-preco').value, thumb: document.getElementById('prod-thumb').value, link: document.getElementById('prod-link').value, desc: document.getElementById('prod-desc').value, autor: auth.currentUser.displayName };
+            const p = { 
+                nome: document.getElementById('prod-nome').value, 
+                preco: document.getElementById('prod-preco').value, 
+                thumb: document.getElementById('prod-thumb').value, 
+                link: document.getElementById('prod-link').value, 
+                desc: document.getElementById('prod-desc').value, 
+                autorNome: auth.currentUser.displayName,
+                autorFoto: auth.currentUser.photoURL,
+                autorEmail: auth.currentUser.email
+            };
             await addDoc(collection(db, "produtos"), p); alert("Postado!"); toggleForm();
         };
 
         window.seAfiliar = async (id, nome, link) => {
             const q = query(collection(db, "afiliacoes"), where("emailAfiliado", "==", auth.currentUser.email), where("produtoId", "==", id));
-            if(!(await getDocs(q)).empty) return alert("Já é afiliado!");
+            if(!(await getDocs(q)).empty) return alert("Você já se afiliou!");
             await addDoc(collection(db, "afiliacoes"), { emailAfiliado: auth.currentUser.email, produtoId: id, produtoNome: nome, produtoLink: link });
-            alert("Sucesso!");
+            alert("Adicionado em Meus Links!");
         };
     </script>
 </body>
